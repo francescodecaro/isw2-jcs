@@ -26,7 +26,8 @@ public class JCSUniTest {
         Object[][] elems = new Object[][] {
                 { jcs, buildList(), "some:key" },
                 { jcs, buildList(), "some:key2" },
-                { jcs, buildList(), "some:key3" }
+                { jcs, buildList(), "some:key3" },
+                { jcs, buildList(), "some:key4" }
         };
 
         for (Object[] elem : elems) {
