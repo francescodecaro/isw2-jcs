@@ -2,6 +2,7 @@ package it.uniroma2.dicii.isw2.jcs.paramTests;
 
 import org.apache.jcs.JCS;
 import org.apache.jcs.engine.behavior.ICacheElement;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -13,6 +14,7 @@ import java.util.Collection;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@Ignore
 @RunWith(Parameterized.class)
 public class JCSCacheElementRetrievalUnitTest {
 
@@ -28,7 +30,7 @@ public class JCSCacheElementRetrievalUnitTest {
         Object[][] elems = new Object[][] {
                 { jcs, 0, "test_key", "test_data"},
                 { jcs, 0, "test_key2", "test_data2" },
-                { jcs, 0, "test_key3", "test_data3"}
+                { jcs, 0, "test_key3", "test_data3"},
         };
 
         for (Object[] elem : elems) {
