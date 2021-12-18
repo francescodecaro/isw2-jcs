@@ -27,9 +27,9 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.jcs.JCS;
+import org.apache.jcs.engine.CompositeCacheAttributes;
 import org.apache.jcs.engine.stats.behavior.IStatElement;
 import org.apache.jcs.engine.stats.behavior.IStats;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,20 +54,21 @@ public class JCSThrashTest {
      */
     private JCS jcs;
     private String key;
-    private String value;
+    private Object value;
 
     @Parameters
     public static Collection<Object[]> configure() throws Exception {
         JCS.setConfigFilename( "/TestThrash.ccf" );
         JCS jcs = JCS.getInstance( "testcache" );
+        JCS jcs2 = JCS.getInstance("testcache", new CompositeCacheAttributes());
         return Arrays.asList(new Object[][] {
-                { JCS.getInstance( "testcache" ), "key", "value" },
-                { JCS.getInstance( "testcache" ), "key", "value" },
-                { JCS.getInstance( "testcache" ), "key", "value" }
+                { jcs, "key", "value" },
+                // jcs, "list", Arrays.asList("Geeks", "for", "Geeks")},
+                { jcs2, "key", "value" }
         });
     }
 
-    public JCSThrashTest(JCS jcs, String key, String value) {
+    public JCSThrashTest(JCS jcs, String key, Object value) {
         this.jcs = jcs;
         this.key = key;
         this.value = value;

@@ -19,7 +19,7 @@ public class JCSRemovalSimpleConcurrentTest {
 
     @Parameters
     public static Collection<Object[]> configure() throws Exception {
-        JCS.setConfigFilename( "/TestRemoval.ccf" );
+        //JCS.setConfigFilename( "/TestRemoval.ccf" );
         JCS jcs = JCS.getInstance( "testCache1" );
         return Arrays.asList(new Object[][] {
                 { jcs },
