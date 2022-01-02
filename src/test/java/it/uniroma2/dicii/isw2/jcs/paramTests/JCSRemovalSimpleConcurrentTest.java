@@ -1,35 +1,20 @@
 package it.uniroma2.dicii.isw2.jcs.paramTests;
 
 import org.apache.jcs.JCS;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
-
-import java.util.Arrays;
-import java.util.Collection;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-@RunWith(Parameterized.class)
 public class JCSRemovalSimpleConcurrentTest {
 
     private JCS jcs;
 
-    @Parameters
-    public static Collection<Object[]> configure() throws Exception {
-        //JCS.setConfigFilename( "/TestRemoval.ccf" );
-        JCS jcs = JCS.getInstance( "testCache1" );
-        return Arrays.asList(new Object[][] {
-                { jcs },
-                { jcs },
-                { jcs }
-        });
-    }
-
-    public JCSRemovalSimpleConcurrentTest(JCS jcs) {
-        this.jcs = jcs;
+    @Before
+    public void configure() throws Exception {
+        JCS.setConfigFilename( "/TestRemoval.ccf" );
+        this.jcs = JCS.getInstance( "testCache1" );
     }
 
     @Test

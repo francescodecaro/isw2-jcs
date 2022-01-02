@@ -30,7 +30,9 @@ import org.apache.jcs.JCS;
 import org.apache.jcs.engine.CompositeCacheAttributes;
 import org.apache.jcs.engine.stats.behavior.IStatElement;
 import org.apache.jcs.engine.stats.behavior.IStats;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -53,28 +55,41 @@ public class JCSThrashTest {
      * the cache instance
      */
     private JCS jcs;
-    private String key;
-    private Object value;
+
+    private String key1;
+    private Object value1;
+    private String key2;
+    private Object value2;
+    private String key3;
+    private Object value3;
+    private String key4;
 
     @Parameters
-    public static Collection<Object[]> configure() throws Exception {
-        JCS.setConfigFilename( "/TestThrash.ccf" );
-        JCS jcs = JCS.getInstance( "testcache" );
-        JCS jcs2 = JCS.getInstance("testcache", new CompositeCacheAttributes());
+    public static Collection<Object[]> params() {
         return Arrays.asList(new Object[][] {
-                { jcs, "key", "value" },
-                // jcs, "list", Arrays.asList("Geeks", "for", "Geeks")},
-                { jcs2, "key", "value" }
+                { "key", "value", "key2", "value2", "key3", "value3", "key4" },
+                { "key", "value", "key2", "value2", "key3", "value3", "key2" },
+                { "key", "value", "key2", "value2", "key3", "value3", "key4" },
         });
     }
 
-    public JCSThrashTest(JCS jcs, String key, Object value) {
-        this.jcs = jcs;
-        this.key = key;
-        this.value = value;
+    public JCSThrashTest(String key1, Object value1, String key2, Object value2, String key3, Object value3, String key4) {
+        this.key1 = key1;
+        this.value1 = value1;
+        this.key2 = key2;
+        this.value2 = value2;
+        this.key3 = key3;
+        this.value3 = value3;
+        this.key4 = key4;
     }
 
-    @Before
+    @Before()
+    public void configure() throws Exception {
+        JCS.setConfigFilename( "/TestThrash.ccf" );
+        this.jcs = JCS.getInstance("testcache");
+    }
+
+    @After
     public void tearDown() throws Exception {
         jcs.clear();
         jcs.dispose();
@@ -89,15 +104,15 @@ public class JCSThrashTest {
         // Make sure the element is not found
         assertEquals( 0, getListSize() );
 
-        assertNull( jcs.get( key ) );
+        assertNull( jcs.get( key1 ) );
 
-        jcs.put( key, value );
+        jcs.put( key1, value1 );
 
         // Get the element
         LOG.info( "jcs.getStats(): " + jcs.getStatistics() );
         assertEquals( 1, getListSize() );
-        assertNotNull( jcs.get( key ) );
-        assertEquals( value, jcs.get( key ) );
+        assertNotNull( jcs.get( key1 ) );
+        assertEquals( value1, jcs.get( key1 ) );
     }
 
     /**
@@ -106,21 +121,21 @@ public class JCSThrashTest {
      */
     @Test
     public void testRemove() throws Exception {
-        jcs.put( "key1", "value1" );
+        jcs.put( key1, value1 );
         assertEquals( 1, getListSize() );
 
-        jcs.remove( "key1" );
+        jcs.remove( key1 );
         assertEquals( 0, getListSize() );
 
-        jcs.put( "key2", "value2" );
-        jcs.put( "key3", "value3" );
+        jcs.put( key2, value2 );
+        jcs.put( key3, value3 );
         assertEquals( 2, getListSize() );
 
-        jcs.remove( "key2" );
+        jcs.remove( key2);
         assertEquals( 1, getListSize() );
 
         // Try to remove an object that is not there in the store
-        jcs.remove( "key4" );
+        jcs.remove( key4 );
         assertEquals( 1, getListSize() );
     }
 

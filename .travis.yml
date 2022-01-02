@@ -1,4 +1,8 @@
 language: java
-branches:
-  only:
-    - main
+
+jdk:
+  - openjdk11
+
+script:
+  - mvn test -Dcoverage
+  - sh coverage.sh
