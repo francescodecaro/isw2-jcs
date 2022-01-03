@@ -1,0 +1,1 @@
+mvn sonar:sonar -Dsonar.projectKey=isw2-jcs -Dsonar.host.url=http://localhost:9000 -Dsonar.login=aed2b3a82b986a1a9d362d4bfc31e775196bdbbf -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml,target/site/jacoco/jacoco-jcs.xml -Dsonar.sources=src/main,lib/jcs-1.3/src

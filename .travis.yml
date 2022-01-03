@@ -12,4 +12,5 @@ addons:
 script:
   - mvn test -Dcoverage
   - sh coverage.sh
-  - mvn sonar:sonar -Dsonar.projectKey=francescodecaro_isw2-jcs -Dsonar.coverage.jacoco.xmlReportPaths=target/jacoco-gen/jcs-coverage/file.xml -Dsonar.sources=src/main
+  - mvn sonar:sonar -Dsonar.projectKey=francescodecaro_isw2-jcs -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml,target/site/jacoco/jacoco-jcs.xml -Dsonar.sources=src/main,lib/jcs-1.3/src
+

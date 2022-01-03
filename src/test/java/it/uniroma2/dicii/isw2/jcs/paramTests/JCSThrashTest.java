@@ -46,6 +46,7 @@ import static org.junit.Assert.*;
  * http://www.opensubscriber.com/message/jcs-users@jakarta.apache.org/2435965.html
  *
  */
+@Ignore
 @RunWith(Parameterized.class)
 public class JCSThrashTest {
 

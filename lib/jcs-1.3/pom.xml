@@ -348,7 +348,9 @@ jcs.
     <plugins>
       <!-- TODO: later use toolchain support to do compilation on an external JDK 1.3+ compiler -->
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
         <configuration>
           <source>${maven.compile.source}</source>
           <target>${maven.compile.target}</target>
@@ -380,7 +382,8 @@ jcs.
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <configuration> 
+        <version>3.3.1</version>
+        <configuration>
           <aggregate>true</aggregate>
         </configuration> 
       </plugin>
@@ -492,7 +495,7 @@ jcs.
       <build>
         <plugins>
           <!-- We want to sign the artifact, the POM, and all attached artifacts -->
-          <plugin>
+<!--          <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
             <configuration>
               <passphrase>${gpg.passphrase}</passphrase>
@@ -506,7 +509,7 @@ jcs.
                 </goals>
               </execution>
             </executions>
-          </plugin>
+          </plugin>-->
           <plugin>
             <artifactId>maven-source-plugin</artifactId>
             <executions>
