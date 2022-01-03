@@ -1,4 +1,16 @@
 language: java
-branches:
-  only:
-    - main
+
+jdk:
+  - openjdk11
+
+addons:
+  sonarcloud:
+    organization: "francescodecaro"
+    token:
+      secure: "QJYNbT4wfCOF0l46UW4BYv72Gti1D16LtGuyRQOAFQgc0SvK8VJ0fr02q72fR/rm9uWIU55CKkEd9aHj9cE2Axgjx1HccV/Ns3Z6lYZe9Egu1A+2C9HGidetXSKfGT8/mPdtoGewQRetcztTmOOntZ7od/9xSZWRvTusm9hulVCjH+aZPtwiw1iBPrYI7c7pr39IOdIbg7jo6GY0hHtr7+veHnFtumpKTs0YDRXxO8JofwN2gO592H5r/mkue7xD1kSXr4/8VoaQF5sAqcF5nhVO5H2ObnAWKgvHU6t/SZDaeEGPGf0U9hnKK6wKTuQSy+XQqgRbBlZEKK4nnYeeF6bYHJtSv6WM5UIzOEhQHT8vPeAukItpo9tA18NY4ULWVIzHCSpgqA6ysYmHl6Tflmnr9UB9pie5PkH2s0S7QVdCJX5XhlK8FIQ+5Bu5RJ4D6bURkfEOZ/81W3FkOmEYsa1DRzSOupDidsiA00bWVL/58q3Vpg1mT5A+ZofmcgRBWx1nIw9Kinjpb5eknAcjR2++HUvBnXVqIWasIJGIGbJyvuJ7WDrlDSgcAfwr5X8yxizVSatUljv46bwo+o00mauUF84ho7Jnsf1vboXNuyomZUjAIdG7wBAkKVYmQX0po23IXhvIZN/YzX0qS6yqKcBoW8vNTLUpNc4DeIcT0KA="
+
+script:
+  - mvn test -Dcoverage
+  - sh coverage.sh
+  - mvn sonar:sonar -Dsonar.projectKey=francescodecaro_isw2-jcs -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml,target/site/jacoco/jacoco-jcs.xml -Dsonar.sources=src/main,lib/jcs-1.3/src
+
